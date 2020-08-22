@@ -14,3 +14,71 @@ body {
 	margin-top: 20px;
 }
 
+.movie {
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	padding-bottom: 10px;
+	margin: 10px;
+	border: black double 5px;
+	width: 210px;
+}
+
+.movie-image {
+	width: 200px;
+	height: auto;
+	padding-bottom: 5px;
+}
+
+.movie-title-date {
+	display: flex;
+}
+
+.movies-container {
+	display: flex;
+	/* flex-direction: row; */
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
+
+.movie-title {
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 5px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+.release-date {
+	font-size: 18;
+	font-weight: bold;
+	color: white;
+	text-align: center;
+	margin-top: 2px;
+	margin-left: auto;
+	margin-right: 5px;
+}
+
+.year {
+	background-color: black;
+	padding: 5px;	
+}
+
+.movie-button {
+	height: 20px;
+	width: 50px;
+	background-color: blue;
+	color: white;
+	margin-top: auto;
+	font-size:10px;
+	font-weight: bold;
+	margin-left: 5px;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
