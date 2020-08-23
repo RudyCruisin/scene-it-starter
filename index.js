@@ -5,21 +5,16 @@ $(document).ready( ()=> {
     function renderMovie(movieArray) {
 //         console.log("i'm here")
         // console.log(movieArray)
-        var flag = false;
+        document.getElementById('search-form').addEventListener('submit', function(e){
+            var flag = false;
         const movieHTML = movieArray.map((currentMovie) => {
+            if (flag === false) {
+                $(".movies-container").empty();
+                flag = true;
+            }
             // console.log(currentMovie.Title)
-            document.getElementById('search-form').addEventListener('submit', function(e){
-                if (flag === false) {
-                    $(".movies-container").empty();
-                    flag = true;
-                }
-                // console.log(e);
                 e.preventDefault();
                 var searchfield = e.target[0].value;
-                // var teststring = "The Dark Knight";
-                // console.log(kmpSearch(searchfield.toLowerCase(), teststring.toLowerCase()) != -1);
-                // console.log(searchfield.toLowerCase());
-                // console.log(currentMovie.Title.toLowerCase());
                 if ((kmpSearch(searchfield.toLowerCase(), currentMovie.Title.toLowerCase()) != -1) === true){
                     $(".movies-container").append(`
                         <div class = "movie">
@@ -33,7 +28,6 @@ $(document).ready( ()=> {
                             <button class = "movie-button" type = "button"><a class = "imdb" href= "https://www.imdb.com/title/${currentMovie.imdbID}"> IMDB</a></button>
                         </div>
                 `); 
-                    // console.log ('true');
                 };
 
                 // document.getElementById('search-form').reset();
@@ -42,7 +36,7 @@ $(document).ready( ()=> {
          // console.log(movieHTML.join(' '))
         // $('.movies-container').html(movieHTML.join(' '))
     }
-    renderMovie(movieData)
+    renderMovie(movieData);
 });
 
 function kmpSearch(pattern, text) {
