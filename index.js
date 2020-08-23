@@ -22,6 +22,11 @@ $(document).ready(() => {
               currentMovie.Title.toLowerCase()
             ) !=
               -1) ===
+            true || (kmpSearch(
+              searchfield.toLowerCase(),
+              currentMovie.Year.toLowerCase()
+            ) !=
+              -1) ===
             true
           ) {
             $(".movies-container").append(`
