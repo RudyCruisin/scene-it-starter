@@ -4,15 +4,12 @@ $(document).ready(() => {
   function renderMovie(movieArray) {
     //         console.log("i'm here")
     // console.log(movieArray)
-    document
-      .getElementById("search-form")
-      .addEventListener("submit", function (e) {
-        var flag = false;
+    // document
+    // .getElementById("search-form")
+    $("#search-form")
+      .on("submit", function (e) {
+        $(".movies-container").empty();
         const movieHTML = movieArray.map((currentMovie) => {
-          if (flag === false) {
-            $(".movies-container").empty();
-            flag = true;
-          }
           // console.log(currentMovie.Title)
           e.preventDefault();
           var searchfield = e.target[0].value;
@@ -22,12 +19,13 @@ $(document).ready(() => {
               currentMovie.Title.toLowerCase()
             ) !=
               -1) ===
-            true || (kmpSearch(
+              true ||
+            (kmpSearch(
               searchfield.toLowerCase(),
               currentMovie.Year.toLowerCase()
             ) !=
               -1) ===
-            true
+              true
           ) {
             $(".movies-container").append(`
                         <div class = "movie">
@@ -38,19 +36,37 @@ $(document).ready(() => {
                                 <div class = "release-date"><span class = "year">${currentMovie.Year}</span>
                                 </div>
                             </div>
-                            <button class = "movie-button" type = "button"><a class = "imdb" href= "https://www.imdb.com/title/${currentMovie.imdbID}"> IMDB</a></button>
+                            <div class = "card-buttons">
+                              <button class = "add-button" onClick = saveToWatchList("${currentMovie.imdbID}") type = "button">ADD</button>
+                              <button class = "movie-button" type = "button"><a class = "imdb" href= "https://www.imdb.com/title/${currentMovie.imdbID}">IMDB</a></button>
+                            </div>
                         </div>
                 `);
-          }
+          };
 
-          // document.getElementById('search-form').reset();
         });
       });
     // console.log(movieHTML.join(' '))
     // $('.movies-container').html(movieHTML.join(' '))
-  }
+  };
   renderMovie(movieData);
 });
+
+function saveToWatchList(imdbID) {
+  // console.log("happy");
+  var movie = movieData.find((currentMovie) => {
+    return currentMovie.imdbID == imdbID;
+  });
+  var watchlistJSON = localStorage.getItem('watchlist');
+  var watchlist = JSON.parse(watchlistJSON);
+  // console.log(watchlist);
+  if (watchlist == null) {
+    watchlist = [];
+  }
+  watchlist.push(movie);
+  watchlistJSON = JSON.stringify(watchlist);
+  localStorage.setItem("watchlist", watchlistJSON);
+}
 
 function kmpSearch(pattern, text) {
   if (pattern.length == 0) return 0; // Immediate match
