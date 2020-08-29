@@ -6,7 +6,7 @@ $(document).ready(() => {
     e.preventDefault();
     var searchfield = e.target[0].value;
     var urlEncodedSearchString = encodeURIComponent(searchfield);
-    fetch("http://www.omdbapi.com/?apikey=8534d2a7&s=" + urlEncodedSearchString)
+    fetch("https://www.omdbapi.com/?apikey=8534d2a7&s=" + urlEncodedSearchString)
       .then((response) => response.json())
       .then((data) => {
         moviedatasearch = data.Search;
